@@ -31,10 +31,10 @@ jobs:
           echo "githubToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.gradle/gradle.properties
 
       - name: Gradle (Build)
-        run: sh gradlew build
+        run: sh gradlew --no-daemon build
 
       - name: Gradle (Publish)
-        run: sh gradlew -Pkotdis.user=${{ secrets.MAVEN_USER }} -Pkotdis.password=${{ secrets.MAVEN_PASSWORD }} publish
+        run: sh gradlew --no-daemon -Pkotdis.user=${{ secrets.MAVEN_USER }} -Pkotdis.password=${{ secrets.MAVEN_PASSWORD }} publish
 
       - name: Create release description
         run: kotlin .github/tag.main.kts

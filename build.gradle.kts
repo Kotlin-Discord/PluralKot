@@ -65,6 +65,10 @@ val javadocJar = task("javadocJar", Jar::class) {
     from(tasks.javadoc)
 }
 
+val printVersion = task("printVersion") {
+    logger.quiet(version.toString())
+}
+
 fun runCommand(command: String): String {
     val output = ByteArrayOutputStream()
 
@@ -125,7 +129,7 @@ tasks.dokkaHtml.configure {
 
 gitHooks {
     setHooks(
-        mapOf("pre-commit" to "kord-extensions:detekt")
+        mapOf("pre-commit" to "detekt")
     )
 }
 

@@ -29,14 +29,14 @@ jobs:
           echo "githubToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.gradle/gradle.properties
 
       - name: Gradle (Build)
-        run: sh gradlew build
+        run: sh gradlew --no-daemon build
 
       - name: Gradle (Publish)
         run: |
           if [[ $(sh gradlew printVersion) != *"SNAPSHOT"* ]]; then
             echo "Skipping: Not a snapshot version"
           else
-            sh gradlew -Pkotdis.user=${{ secrets.MAVEN_USER }} -Pkotdis.password=${{ secrets.MAVEN_PASSWORD }} publish
+            sh gradlew --no-daemon -Pkotdis.user=${{ secrets.MAVEN_USER }} -Pkotdis.password=${{ secrets.MAVEN_PASSWORD }} publish
           fi
 
       - name: Upload artifacts (JARs)
